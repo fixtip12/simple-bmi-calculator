@@ -19,20 +19,14 @@ class _InputPageState extends State<InputPage> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                  child: reusableCard(),
+                  child: reusableCard(
+                    colour: Color(0xFF1D1E33),
+                  ),
                 ),
                 Expanded(
-                  child: reusableCard(),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  child: reusableCard(),
+                  child: reusableCard(
+                    colour: Color(0xFF1D1E33),
+                  ),
                 ),
               ],
             ),
@@ -42,10 +36,26 @@ class _InputPageState extends State<InputPage> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                  child: reusableCard(),
+                  child: reusableCard(
+                    colour: Color(0xFF1D1E33),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: reusableCard(
+                    colour: Color(0xFF1D1E33),
+                  ),
                 ),
                 Expanded(
-                  child: reusableCard(),
+                  child: reusableCard(
+                    colour: Color(0xFF1D1E33),
+                  ),
                 ),
               ],
             ),
@@ -57,9 +67,9 @@ class _InputPageState extends State<InputPage> {
 }
 
 class reusableCard extends StatelessWidget {
-  const reusableCard({
-    Key key,
-  }) : super(key: key);
+  reusableCard({@required this.colour});
+
+  Color colour;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +79,7 @@ class reusableCard extends StatelessWidget {
       // -- color: Color(0xFF1D1E33), --
       margin: EdgeInsets.all(15.0),
       decoration: BoxDecoration(
-        color: Color(0xFF1D1E33),
+        color: colour,
         borderRadius: BorderRadius.circular(10),
       ),
     );
