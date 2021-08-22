@@ -19,28 +19,10 @@ class _InputPageState extends State<InputPage> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                  child: Container(
-                    // this is shorthand for using color within decoration: BoxDecoration
-                    // can't have both
-                    // -- color: Color(0xFF1D1E33), --
-                    margin: EdgeInsets.all(15.0),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF1D1E33),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
+                  child: reusableCard(),
                 ),
                 Expanded(
-                  child: Container(
-                    // this is shorthand for using color within decoration: BoxDecoration
-                    // can't have both
-                    // -- color: Color(0xFF1D1E33), --
-                    margin: EdgeInsets.all(15.0),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF1D1E33),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
+                  child: reusableCard(),
                 ),
               ],
             ),
@@ -50,16 +32,7 @@ class _InputPageState extends State<InputPage> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                  child: Container(
-                    // this is shorthand for using color within decoration: BoxDecoration
-                    // can't have both
-                    // -- color: Color(0xFF1D1E33), --
-                    margin: EdgeInsets.all(15.0),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF1D1E33),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
+                  child: reusableCard(),
                 ),
               ],
             ),
@@ -69,33 +42,35 @@ class _InputPageState extends State<InputPage> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                  child: Container(
-                    // this is shorthand for using color within decoration: BoxDecoration
-                    // can't have both
-                    // -- color: Color(0xFF1D1E33), --
-                    margin: EdgeInsets.all(15.0),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF1D1E33),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
+                  child: reusableCard(),
                 ),
                 Expanded(
-                  child: Container(
-                    // this is shorthand for using color within decoration: BoxDecoration
-                    // can't have both
-                    // -- color: Color(0xFF1D1E33), --
-                    margin: EdgeInsets.all(15.0),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF1D1E33),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
+                  child: reusableCard(),
                 ),
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class reusableCard extends StatelessWidget {
+  const reusableCard({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // this is shorthand for using color within decoration: BoxDecoration
+      // can't have both
+      // -- color: Color(0xFF1D1E33), --
+      margin: EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+        color: Color(0xFF1D1E33),
+        borderRadius: BorderRadius.circular(10),
       ),
     );
   }
