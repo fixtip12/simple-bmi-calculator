@@ -8,8 +8,10 @@ import 'reusable_icon.dart';
 // eg something that needed to be calculated like a .toString() operation
 // this is assigned at compile time, which is fine for a const
 const bottomContainerHeight = 80.0;
-const reusableCardColour = Color(0xFF1D1E33);
+const activeCardColour = Color(0xFF1D1E33);
+const inactiveCardColour = Color(0XFF111328);
 const bottomContainerColour = Color(0xFFEB1555);
+enum Gender { male, female }
 
 class InputPage extends StatefulWidget {
   @override
@@ -17,6 +19,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Gender selectedGender;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,21 +34,40 @@ class _InputPageState extends State<InputPage> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                  child: ReusableCard(
-                    colour: reusableCardColour,
-                    cardChild: ReusableIcon(
-                      myIcon: FontAwesomeIcons.mars,
-                      textData: 'MALE',
+                  child: GestureDetector(
+                    onTap: () {
+                      print('click');
+                      setState(() {
+                        selectedGender = Gender.male;
+                      });
+                    },
+                    child: ReusableCard(
+                      colour: selectedGender == Gender.male
+                          ? activeCardColour
+                          : inactiveCardColour,
+                      cardChild: ReusableIcon(
+                        myIcon: FontAwesomeIcons.mars,
+                        textData: 'MALE',
+                      ),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: ReusableCard(
-                    cardChild: ReusableIcon(
-                      myIcon: FontAwesomeIcons.venus,
-                      textData: 'FEMALE',
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedGender = Gender.female;
+                      });
+                    },
+                    child: ReusableCard(
+                      cardChild: ReusableIcon(
+                        myIcon: FontAwesomeIcons.venus,
+                        textData: 'FEMALE',
+                      ),
+                      colour: selectedGender == Gender.female
+                          ? activeCardColour
+                          : inactiveCardColour,
                     ),
-                    colour: reusableCardColour,
                   ),
                 ),
               ],
@@ -56,7 +79,7 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   child: ReusableCard(
-                    colour: reusableCardColour,
+                    colour: inactiveCardColour,
                   ),
                 ),
               ],
@@ -68,12 +91,12 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   child: ReusableCard(
-                    colour: reusableCardColour,
+                    colour: inactiveCardColour,
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
-                    colour: reusableCardColour,
+                    colour: inactiveCardColour,
                   ),
                 ),
               ],
