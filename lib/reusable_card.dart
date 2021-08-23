@@ -23,7 +23,7 @@ class ReusableCard extends StatelessWidget {
         // this is shorthand for using color within decoration: BoxDecoration
         // can't have both
         // -- color: Color(0xFF1D1E33), --
-        margin: EdgeInsets.all(15.0),
+        margin: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: colour,
           borderRadius: BorderRadius.circular(10),
