@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ReusableCard extends StatelessWidget {
-  ReusableCard({@required this.colour, this.cardChild});
+  ReusableCard({@required this.colour, this.cardChild, this.gestureDetector});
 
   // the value of a const or final can't be changed after it's created, they are immutable
   // a const can't be assigned to anything that would be created or changed after compile time
@@ -11,18 +11,22 @@ class ReusableCard extends StatelessWidget {
 
   final Color colour;
   final Widget cardChild;
+  final Function gestureDetector;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: cardChild,
-      // this is shorthand for using color within decoration: BoxDecoration
-      // can't have both
-      // -- color: Color(0xFF1D1E33), --
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: colour,
-        borderRadius: BorderRadius.circular(10),
+    return GestureDetector(
+      onTap: gestureDetector,
+      child: Container(
+        child: cardChild,
+        // this is shorthand for using color within decoration: BoxDecoration
+        // can't have both
+        // -- color: Color(0xFF1D1E33), --
+        margin: EdgeInsets.all(15.0),
+        decoration: BoxDecoration(
+          color: colour,
+          borderRadius: BorderRadius.circular(10),
+        ),
       ),
     );
   }

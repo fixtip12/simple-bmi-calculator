@@ -21,6 +21,12 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
 
+  void setGender(Gender myGender) {
+    setState(() {
+      selectedGender = myGender;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,40 +40,35 @@ class _InputPageState extends State<InputPage> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      print('click');
+                  child: ReusableCard(
+                    colour: selectedGender == Gender.male
+                        ? activeCardColour
+                        : inactiveCardColour,
+                    cardChild: ReusableIcon(
+                      myIcon: FontAwesomeIcons.mars,
+                      textData: 'MALE',
+                    ),
+                    gestureDetector: () {
                       setState(() {
                         selectedGender = Gender.male;
                       });
                     },
-                    child: ReusableCard(
-                      colour: selectedGender == Gender.male
-                          ? activeCardColour
-                          : inactiveCardColour,
-                      cardChild: ReusableIcon(
-                        myIcon: FontAwesomeIcons.mars,
-                        textData: 'MALE',
-                      ),
-                    ),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    cardChild: ReusableIcon(
+                      myIcon: FontAwesomeIcons.venus,
+                      textData: 'FEMALE',
+                    ),
+                    colour: selectedGender == Gender.female
+                        ? activeCardColour
+                        : inactiveCardColour,
+                    gestureDetector: () {
                       setState(() {
                         selectedGender = Gender.female;
                       });
                     },
-                    child: ReusableCard(
-                      cardChild: ReusableIcon(
-                        myIcon: FontAwesomeIcons.venus,
-                        textData: 'FEMALE',
-                      ),
-                      colour: selectedGender == Gender.female
-                          ? activeCardColour
-                          : inactiveCardColour,
-                    ),
                   ),
                 ),
               ],
