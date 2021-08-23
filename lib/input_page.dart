@@ -2,16 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_card.dart';
 import 'reusable_icon.dart';
-
-// this is a good use of a const, we won't be changing this
-// we could not use a constant for something that required our app to be currently running
-// eg something that needed to be calculated like a .toString() operation
-// this is assigned at compile time, which is fine for a const
-const bottomContainerHeight = 80.0;
-const activeCardColour = Color(0xFF1D1E33);
-const inactiveCardColour = Color(0XFF111328);
-const bottomContainerColour = Color(0xFFEB1555);
-enum Gender { male, female }
+import 'constants.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -19,9 +10,10 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Gender selectedGender;
+  kGender selectedGender;
+  int height = 180;
 
-  void setGender(Gender myGender) {
+  void setGender(kGender myGender) {
     setState(() {
       selectedGender = myGender;
     });
@@ -31,9 +23,10 @@ class _InputPageState extends State<InputPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('BMI CALCULATOR'),
+        title: Center(child: Text('BMI CALCULATOR')),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: Row(
@@ -41,16 +34,16 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   child: ReusableCard(
-                    colour: selectedGender == Gender.male
-                        ? activeCardColour
-                        : inactiveCardColour,
+                    colour: selectedGender == kGender.male
+                        ? kActiveCardColour
+                        : kInactiveCardColour,
                     cardChild: ReusableIcon(
                       myIcon: FontAwesomeIcons.mars,
                       textData: 'MALE',
                     ),
                     gestureDetector: () {
                       setState(() {
-                        selectedGender = Gender.male;
+                        selectedGender = kGender.male;
                       });
                     },
                   ),
@@ -61,12 +54,12 @@ class _InputPageState extends State<InputPage> {
                       myIcon: FontAwesomeIcons.venus,
                       textData: 'FEMALE',
                     ),
-                    colour: selectedGender == Gender.female
-                        ? activeCardColour
-                        : inactiveCardColour,
+                    colour: selectedGender == kGender.female
+                        ? kActiveCardColour
+                        : kInactiveCardColour,
                     gestureDetector: () {
                       setState(() {
-                        selectedGender = Gender.female;
+                        selectedGender = kGender.female;
                       });
                     },
                   ),
@@ -80,7 +73,44 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   child: ReusableCard(
-                    colour: inactiveCardColour,
+                    colour: kInactiveCardColour,
+                    cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'HEIGHT',
+                            style: kIconTextStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            // this needs to be set when we have text being affected by the crossAxisAlignment
+                            textBaseline: TextBaseline.alphabetic,
+                            children: <Widget>[
+                              Text(
+                                height.toString(),
+                                style: kBmiTextStyle,
+                              ),
+                              Text(
+                                ' cm',
+                                style: kIconTextStyle,
+                              ),
+                            ],
+                          ),
+                          // We can embed widgets within other widgets like this to customise their theme
+                          Slider(
+                            value: height.toDouble(),
+                            min: 120.0,
+                            max: 220.0,
+                            onChanged: (double newValue) {
+                              // newValue is the value the slider is passing to us
+                              // we need setState so we can update the state of our parent
+                              setState(() {
+                                height = newValue.round();
+                              });
+                            },
+                          ),
+                        ]),
                   ),
                 ),
               ],
@@ -92,23 +122,23 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   child: ReusableCard(
-                    colour: inactiveCardColour,
+                    colour: kInactiveCardColour,
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
-                    colour: inactiveCardColour,
+                    colour: kInactiveCardColour,
                   ),
                 ),
               ],
             ),
           ),
           Container(
-            color: bottomContainerColour,
+            color: kBottomContainerColour,
             margin: EdgeInsets.only(top: 10.0),
             // easiest way to expand to full width of the screen
             width: double.infinity,
-            height: bottomContainerHeight,
+            height: kBottomContainerHeight,
           ),
         ],
       ),
