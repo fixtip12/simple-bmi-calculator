@@ -1,4 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'reusable_card.dart';
+import 'reusable_icon.dart';
+
+// this is a good use of a const, we won't be changing this
+// we could not use a constant for something that required our app to be currently running
+// eg something that needed to be calculated like a .toString() operation
+// this is assigned at compile time, which is fine for a const
+const bottomContainerHeight = 80.0;
+const reusableCardColour = Color(0xFF1D1E33);
+const bottomContainerColour = Color(0xFFEB1555);
 
 class InputPage extends StatefulWidget {
   @override
@@ -19,13 +30,21 @@ class _InputPageState extends State<InputPage> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                  child: reusableCard(
-                    colour: Color(0xFF1D1E33),
+                  child: ReusableCard(
+                    colour: reusableCardColour,
+                    cardChild: ReusableIcon(
+                      myIcon: FontAwesomeIcons.mars,
+                      textData: 'MALE',
+                    ),
                   ),
                 ),
                 Expanded(
-                  child: reusableCard(
-                    colour: Color(0xFF1D1E33),
+                  child: ReusableCard(
+                    cardChild: ReusableIcon(
+                      myIcon: FontAwesomeIcons.venus,
+                      textData: 'FEMALE',
+                    ),
+                    colour: reusableCardColour,
                   ),
                 ),
               ],
@@ -36,8 +55,8 @@ class _InputPageState extends State<InputPage> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                  child: reusableCard(
-                    colour: Color(0xFF1D1E33),
+                  child: ReusableCard(
+                    colour: reusableCardColour,
                   ),
                 ),
               ],
@@ -48,39 +67,26 @@ class _InputPageState extends State<InputPage> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                  child: reusableCard(
-                    colour: Color(0xFF1D1E33),
+                  child: ReusableCard(
+                    colour: reusableCardColour,
                   ),
                 ),
                 Expanded(
-                  child: reusableCard(
-                    colour: Color(0xFF1D1E33),
+                  child: ReusableCard(
+                    colour: reusableCardColour,
                   ),
                 ),
               ],
             ),
+          ),
+          Container(
+            color: bottomContainerColour,
+            margin: EdgeInsets.only(top: 10.0),
+            // easiest way to expand to full width of the screen
+            width: double.infinity,
+            height: bottomContainerHeight,
           ),
         ],
-      ),
-    );
-  }
-}
-
-class reusableCard extends StatelessWidget {
-  reusableCard({@required this.colour});
-
-  Color colour;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      // this is shorthand for using color within decoration: BoxDecoration
-      // can't have both
-      // -- color: Color(0xFF1D1E33), --
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: colour,
-        borderRadius: BorderRadius.circular(10),
       ),
     );
   }
